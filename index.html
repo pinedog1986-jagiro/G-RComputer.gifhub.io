@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPro Studio | G&R CUMPUTER</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#070b14',
+                            card: '#0f172a',
+                            border: '#1e293b',
+                            cyan: '#00F2FE',
+                            cyanHover: '#38bdf8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ambient Glow & Custom Utilities */
+        .glow-cyan {
+            box-shadow: 0 0 35px -5px rgba(0, 242, 254, 0.25);
+        }
+        .glow-badge {
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-[#070b14] text-slate-200 font-sans antialiased selection:bg-cyan-500 selection:text-slate-950 min-h-screen relative overflow-x-hidden">
+
+    <!-- Ambient Background Gradients -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-600/15 rounded-full blur-[130px]"></div>
+        <div class="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-indigo-600/10 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-10 left-1/4 w-[36rem] h-[36rem] bg-blue-600/10 rounded-full blur-[140px]"></div>
+    </div>
+
+    <!-- 1. Top Announcement Bar -->
+    <aside class="relative z-50 bg-gradient-to-r from-cyan-950/80 via-cyan-900/60 to-slate-950 border-b border-cyan-800/40 text-cyan-200 text-xs sm:text-sm py-2 px-4 text-center">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 animate-pulse">
+                Convocatoria 2026
+            </span>
+            <p class="font-medium">
+                Matrículas abiertas para Cursos de Ofimática, Desarrollo Web e Inteligencia Artificial.
+                <a href="#cursos" class="underline decoration-cyan-400 font-semibold hover:text-white transition-colors ml-1">Ver cupos y temario &rarr;</a>
+            </p>
+        </div>
+    </aside>
+
+    <!-- 2. Sticky Navbar -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-slate-950 shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform duration-200">
+                    <i data-lucide="terminal" class="w-6 h-6 stroke-[2.5]"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-xl font-extrabold tracking-tight text-white">TechPro</span>
+                        <span class="text-xs px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 font-mono font-semibold border border-cyan-800/60">G&R</span>
+                    </div>
+                    <p class="text-[10px] tracking-wider uppercase text-slate-400 font-medium">Academia & Soluciones IT</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#cursos" class="hover:text-cyan-400 transition-colors">Cursos</a>
+                <a href="#consultoria" class="hover:text-cyan-400 transition-colors">Consultoría</a>
+                <a href="#metodologia" class="hover:text-cyan-400 transition-colors">Metodología</a>
+                <a href="#faq" class="hover:text-cyan-400 transition-colors">Preguntas Frecuentes</a>
+            </nav>
+
+            <!-- WhatsApp Action Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/51972766538?text=Hola%20TechPro,%20deseo%20información%20sobre%20sus%20cursos%20y%20asesorías" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm transition-all shadow-md hover:shadow-cyan-400/20 active:scale-95">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Contactar WhatsApp</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-toggle" type="button" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none" aria-label="Abrir menú de navegación">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-[#0b1220]/95 px-5 pt-3 pb-6 space-y-4">
+            <a href="#cursos" class="block text-base font-medium text-slate-300 hover:text-cyan-400 py-1 mobile-link">Catálogo de Cursos</a>
+            <a href="#consultoria" class="block text-base font-medium text-slate-300 hover:text-cyan-400 py-1 mobile-link">Consultoría & Servicios</a>
+            <a href="#metodologia" class="block text-base font-medium text-slate-300 hover:text-cyan-400 py-1 mobile-link">Nuestra Metodología</a>
+            <a href="#faq" class="block text-base font-medium text-slate-300 hover:text-cyan-400 py-1 mobile-link">Preguntas Frecuentes</a>
+            <a href="https://wa.me/51972766538?text=Hola%20TechPro,%20deseo%20información" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-cyan-400 text-slate-950 font-bold text-sm mt-3">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Chatear por WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <!-- 3. Hero Section -->
+        <section class="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto space-y-8">
+                <!-- Glowing Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-medium glow-badge">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span>Educación tecnológica de alta empleabilidad & Asesoría IT</span>
+                </div>
+
+                <!-- Main Hero Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                    Domina las competencias digitales que <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">lideran el futuro</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto font-normal">
+                    Capacitación 100% práctica en ofimática avanzada, desarrollo web y productividad con IA. Consultoría integral para digitalizar procesos en tu empresa o institución.
+                </p>
+
+                <!-- Dual Action CTAs -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+                    <a href="#cursos" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-base shadow-xl shadow-cyan-500/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                        <span>Explorar Cursos 2026</span>
+                    </a>
+                    <a href="#contacto" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-panel hover:bg-slate-800 text-white font-semibold text-base transition-all border border-slate-700 hover:border-slate-600">
+                        <i data-lucide="calendar" class="w-5 h-5 text-cyan-400"></i>
+                        <span>Agendar Asesoría</span>
+                    </a>
+                </div>
+
+                <!-- Social Proof Counter -->
+                <div class="pt-8 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-4 text-slate-400 text-sm">
+                    <div class="flex -space-x-2">
+                        <span class="w-9 h-9 rounded-full bg-cyan-900 border-2 border-slate-900 flex items-center justify-center text-xs text-cyan-200 font-bold">JD</span>
+                        <span class="w-9 h-9 rounded-full bg-blue-900 border-2 border-slate-900 flex items-center justify-center text-xs text-blue-200 font-bold">MC</span>
+                        <span class="w-9 h-9 rounded-full bg-indigo-900 border-2 border-slate-900 flex items-center justify-center text-xs text-indigo-200 font-bold">AL</span>
+                        <span class="w-9 h-9 rounded-full bg-emerald-900 border-2 border-slate-900 flex items-center justify-center text-xs text-emerald-200 font-bold">+</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                            <span class="text-white font-bold text-sm ml-1">4.9/5</span>
+                        </div>
+                        <p class="text-xs text-slate-400">+500 estudiantes y profesionales capacitados con éxito</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Course Catalog Section -->
+        <section id="cursos" class="py-20 bg-slate-950/60 border-y border-slate-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono font-semibold">Formación de Alta Demanda</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Catálogo de Cursos Prácticos</h2>
+                    <p class="text-slate-400 text-base">Aprende haciendo con proyectos reales, asesoría personalizada y certificación por módulos completos.</p>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course 1: Office & Computing -->
+                    <article class="rounded-2xl glass-panel border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between p-7 group hover:glow-cyan">
+                        <div>
+                            <div class="flex items-center justify-between mb-5">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                    Nivel: Básico a Avanzado
+                                </span>
+                                <span class="text-xs text-slate-400 flex items-center gap-1 font-mono">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> 6 Semanas
+                                </span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 text-cyan-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                Ofimática Profesional & Gestión Documental
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                                Domina Microsoft Word, Excel gerencial (fórmulas, dashboards y tablas dinámicas) y PowerPoint para destacar en el entorno laboral.
+                            </p>
+
+                            <!-- Curriculum Bullets -->
+                            <div class="space-y-2.5 mb-6 text-sm text-slate-300 border-t border-slate-800/80 pt-4">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Excel Financiero, análisis de datos y gráficos dinámicos.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Informes ejecutivos estructurados y correspondencia en Word.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Herramientas en la nube: Google Workspace y OneDrive.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-slate-400 mb-4 pt-4 border-t border-slate-800">
+                                <span>Modalidad: <strong class="text-white">Presencial / Virtual</strong></span>
+                                <span class="text-cyan-300 font-semibold">Vacantes Limitadas</span>
+                            </div>
+                            <a href="https://wa.me/51999999999?text=Hola%20TechPro,%20quiero%20inscribirme%20en%20el%20curso%20de%20Ofimática%20Profesional" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-800 hover:bg-cyan-400 hover:text-slate-950 text-white font-bold text-sm transition-all border border-slate-700 hover:border-transparent">
+                                <span>Inscribirme al Curso</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Course 2: Web & Software -->
+                    <article class="rounded-2xl glass-panel border border-cyan-500/40 relative flex flex-col justify-between p-7 group glow-cyan">
+                        <!-- Popular Ribbon -->
+                        <div class="absolute -top-3.5 right-6 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 text-[11px] font-extrabold uppercase px-3 py-1 rounded-full shadow-lg">
+                            Más Solicitado
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-5">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                                    Nivel: Principiante a Creador
+                                </span>
+                                <span class="text-xs text-slate-400 flex items-center gap-1 font-mono">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> 8 Semanas
+                                </span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-300 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i data-lucide="code-2" class="w-6 h-6"></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-2 text-cyan-300">
+                                Programación & Creación de Páginas Web
+                            </h3>
+                            <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                                Aprende la lógica de desarrollo y construye sitios web dinámicos y atractivos para negocios y proyectos personales con tecnologías actuales.
+                            </p>
+
+                            <!-- Curriculum Bullets -->
+                            <div class="space-y-2.5 mb-6 text-sm text-slate-300 border-t border-slate-800/80 pt-4">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Fundamentos de HTML5 semántico, CSS moderno y Tailwind.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>JavaScript práctico para interacción y consumo de datos.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Despliegue de proyectos online, dominios y hosting rápido.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-slate-400 mb-4 pt-4 border-t border-slate-800">
+                                <span>Modalidad: <strong class="text-white">Clases en Vivo & Prácticas</strong></span>
+                                <span class="text-cyan-300 font-semibold">Tutoría Incluida</span>
+                            </div>
+                            <a href="https://wa.me/51999999999?text=Hola%20TechPro,%20quiero%20inscribirme%20en%20el%20curso%20de%20Programación%20Web" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm transition-all shadow-md">
+                                <span>Inscribirme con Descuento</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Course 3: Artificial Intelligence -->
+                    <article class="rounded-2xl glass-panel border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between p-7 group hover:glow-cyan">
+                        <div>
+                            <div class="flex items-center justify-between mb-5">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                                    Nivel: Basico e Intermedio Práctico
+                                </span>
+                                <span class="text-xs text-slate-400 flex items-center gap-1 font-mono">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> 4 Semanas
+                                </span>
+                            </div>
+
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 text-cyan-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                                <i data-lucide="bot" class="w-6 h-6"></i>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                Inteligencia Artificial Aplicada a Negocios y vida cotidiana
+                            </h3>
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                                Multiplica tu productividad laboral. Aprende a redactar prompts efectivos, automatizar tareas repetitivas y generar contenido multimedia comercial.
+                            </p>
+
+                            <!-- Curriculum Bullets -->
+                            <div class="space-y-2.5 mb-6 text-sm text-slate-300 border-t border-slate-800/80 pt-4">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Ingeniería de prompts estructurados para modelos LLM.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Automatizaciones de correos, resúmenes y análisis rápido.</span>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                                    <span>Casos de estudio reales en marketing, ventas y administración.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-slate-400 mb-4 pt-4 border-t border-slate-800">
+                                <span>Modalidad: <strong class="text-white">100% Práctica Virtual</strong></span>
+                                <span class="text-cyan-300 font-semibold">Herramientas Pro</span>
+                            </div>
+                            <a href="https://wa.me/51999999999?text=Hola%20TechPro,%20quiero%20inscribirme%20en%20el%20curso%20de%20IA%20para%20Negocios" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-800 hover:bg-cyan-400 hover:text-slate-950 text-white font-bold text-sm transition-all border border-slate-700 hover:border-transparent">
+                                <span>Inscribirme al Curso</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Consulting and Digital Services Section -->
+        <section id="consultoria" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono font-semibold">Soluciones Corporativas G&R</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                        Transformamos la operativa digital de tu negocio
+                    </h2>
+                    <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                        No solo capacitamos talento, también implementamos soluciones a medida para empresas, despachos y profesionales independientes que buscan modernizar sus flujos de trabajo.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#contacto" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-sm group">
+                            <span>Solicitar propuesta de consultoría</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Service 1 -->
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-950 border border-cyan-800/60 text-cyan-400 flex items-center justify-center mb-4">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Digitalización de Procesos</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Migración de archivos físicos a repositorios seguros en la nube, control documental y plantillas automatizadas.
+                        </p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-lg bg-blue-950 border border-blue-800/60 text-blue-400 flex items-center justify-center mb-4">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Auditoría & Asesoría Técnica</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Diagnóstico integral de sistemas, seguridad de datos informáticos y optimización del equipamiento computacional.
+                        </p>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-950 border border-indigo-800/60 text-indigo-400 flex items-center justify-center mb-4">
+                            <i data-lucide="globe" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Presencia Web Corporativa</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Desarrollo de páginas landing institucionales y tiendas ligeras optimizadas para captación y ventas por canales de mensajería.
+                        </p>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-800/60 text-emerald-400 flex items-center justify-center mb-4">
+                            <i data-lucide="users-round" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Capacitación In-Company</h4>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            Talleres exclusivos para el personal de tu empresa enfocados exactamente en sus necesidades operativas diarias.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Methodology & Key Metrics Section -->
+        <section id="metodologia" class="py-20 bg-slate-950/70 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono font-semibold">Ventaja Competitiva</span>
+                    <h2 class="text-3xl font-extrabold text-white">¿Por qué estudiar y trabajar con nosotros?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800/80 text-center">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono mb-2">100%</div>
+                        <h4 class="text-base font-bold text-white mb-1">Práctico</h4>
+                        <p class="text-xs text-slate-400">Ejercicios basados en situaciones reales del mercado laboral desde la primera sesión.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800/80 text-center">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono mb-2">Oficial</div>
+                        <h4 class="text-base font-bold text-white mb-1">Certificación Modular</h4>
+                        <p class="text-xs text-slate-400">Acreditación con código único de verificación para sumar valor directo a tu CV.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800/80 text-center">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono mb-2">1 a 1</div>
+                        <h4 class="text-base font-bold text-white mb-1">Tutoría Continua</h4>
+                        <p class="text-xs text-slate-400">Canal directo con el docente para resolver dudas y revisar avances de tus proyectos.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-panel border border-slate-800/80 text-center">
+                        <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono mb-2">+500</div>
+                        <h4 class="text-base font-bold text-white mb-1">Graduados Satisfechos</h4>
+                        <p class="text-xs text-slate-400">Comunidad activa de egresados compartiendo oportunidades y consultas técnicas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Interactive FAQ Accordion Section -->
+        <section id="faq" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14 space-y-3">
+                <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono font-semibold">Claridad y Confianza</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Preguntas Frecuentes</h2>
+                <p class="text-slate-400 text-sm">Todo lo que necesitas saber antes de iniciar tu formación o solicitar una asesoría.</p>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="rounded-2xl glass-panel border border-slate-800 overflow-hidden transition-colors">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-base focus:outline-none">
+                        <span>¿Necesito conocimientos previos para inscribirme en los cursos?</span>
+                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-cyan-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-3">
+                        No. Nuestros cursos de Ofimática y Fundamentos Web comienzan desde los conceptos esenciales y avanzan de manera progresiva. Si ya tienes nociones previas, puedes realizar una prueba de nivel para ubicarte en módulos más avanzados.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="rounded-2xl glass-panel border border-slate-800 overflow-hidden transition-colors">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-base focus:outline-none">
+                        <span>¿Cómo y cuándo se entregan las certificaciones?</span>
+                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-cyan-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-3">
+                        Al completar los módulos y aprobar el proyecto final práctico de cada curso, se emite un certificado digital con código QR de verificación, que puedes adjuntar directamente a tu LinkedIn y currículum vitae.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="rounded-2xl glass-panel border border-slate-800 overflow-hidden transition-colors">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-base focus:outline-none">
+                        <span>¿Cuáles son los métodos de pago disponibles?</span>
+                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-cyan-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-3">
+                        Aceptamos transferencias bancarias (BCP, BBVA, Interbank), pagos mediante billeteras móviles (Yape, Plin) y tarjetas de débito/crédito. Además, contamos con facilidades de pago en dos cuotas para los cursos de 8 semanas.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="rounded-2xl glass-panel border border-slate-800 overflow-hidden transition-colors">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-base focus:outline-none">
+                        <span>¿Brindan asesoría presencial o solo remota para empresas?</span>
+                        <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-cyan-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-slate-800/50 pt-3">
+                        Ofrecemos ambas modalidades. Disponemos de atención presencial para diagnóstico y auditoría en instalaciones locales, así como soporte y consultoría remota en línea para clientes de cualquier región.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Contact Form & Direct Lead Capture Section -->
+        <section id="contacto" class="py-20 bg-gradient-to-b from-slate-950/40 via-cyan-950/20 to-[#070b14] border-t border-slate-800 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="p-8 sm:p-12 rounded-3xl glass-panel border border-cyan-500/30 glow-cyan relative">
+                    <div class="text-center max-w-xl mx-auto mb-8 space-y-2">
+                        <span class="text-xs uppercase tracking-widest text-cyan-400 font-mono font-semibold">Reserva tu Cupo o Cotiza</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">¿Listo para dar el siguiente paso?</h2>
+                        <p class="text-slate-300 text-sm">Completa el formulario y un asesor se comunicará contigo por WhatsApp en menos de 15 minutos.</p>
+                    </div>
+
+                    <form id="lead-form" class="space-y-4 max-w-lg mx-auto">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1" for="user-name">Nombre Completo</label>
+                            <input id="user-name" type="text" required placeholder="Ej. Roberto Rodríguez" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1" for="user-phone">Número de WhatsApp</label>
+                                <input id="user-phone" type="tel" required placeholder="Ej. +51 987 654 321" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1" for="user-interest">Interés Principal</label>
+                                <select id="user-interest" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm">
+                                    <option value="Ofimatica">Ofimática Profesional & Excel</option>
+                                    <option value="Programacion">Programación y Páginas Web</option>
+                                    <option value="IA">Inteligencia Artificial para Negocios</option>
+                                    <option value="Consultoria">Consultoría y Servicios IT G&R</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1" for="user-message">Mensaje o Consulta (Opcional)</label>
+                            <textarea id="user-message" rows="3" placeholder="¿Tienes dudas sobre horarios o modalidad?" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-sm resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm transition-all shadow-lg shadow-cyan-500/25 active:scale-[0.99] flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Enviar Solicitud por WhatsApp</span>
+                        </button>
+                    </form>
+
+                    <div id="form-feedback" class="hidden mt-4 p-3 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-center text-xs font-medium">
+                        ¡Datos listos! Redirigiendo a WhatsApp para iniciar tu conversación...
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 9. Persistent Floating WhatsApp Button -->
+    <a href="https://wa.me/51999999999?text=Hola%20TechPro,%20estoy%20en%20la%20página%20y%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 shadow-emerald-500/30" aria-label="Escribir por WhatsApp">
+        <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
+
+    <!-- 10. Complete Footer -->
+    <footer class="border-t border-slate-800 bg-[#05080f] text-slate-400 text-sm py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-bold">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white">TechPro Studio</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Formación técnica de alto impacto y servicios de consultoría digital para potenciar personas y negocios.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-xs uppercase tracking-wider text-white font-bold mb-3 font-mono">Programas</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#cursos" class="hover:text-cyan-400 transition-colors">Ofimática basica, intermedio y Profesional</a></li>
+                        <li><a href="#cursos" class="hover:text-cyan-400 transition-colors">Programación Web con IA</a></li>
+                        <li><a href="#cursos" class="hover:text-cyan-400 transition-colors">IA Aplicada a Negocios</a></li>
+                        <li><a href="#cursos" class="hover:text-cyan-400 transition-colors">Talleres In-Company</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs uppercase tracking-wider text-white font-bold mb-3 font-mono">Servicios G&R</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#consultoria" class="hover:text-cyan-400 transition-colors">Digitalización de Procesos</a></li>
+                        <li><a href="#consultoria" class="hover:text-cyan-400 transition-colors">Auditoría Técnica</a></li>
+                        <li><a href="#consultoria" class="hover:text-cyan-400 transition-colors">Desarrollo Web Comercial</a></li>
+                        <li><a href="#contacto" class="hover:text-cyan-400 transition-colors">Cotización Directa</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs uppercase tracking-wider text-white font-bold mb-3 font-mono">Atención y Contacto</h5>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cyan-400"></i>
+                            <span>Atención Presencial & Remota</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-3.5 h-3.5 text-cyan-400"></i>
+                            <span>+51 972766538</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i>
+                            <span>Lun - Sáb: 8:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 TechPro Studio / G&R Computer. Todos los derechos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-300 transition-colors">Términos de Servicio</a>
+                    <a href="#" class="hover:text-slate-300 transition-colors">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // FAQ Accordion Logic
+        const faqButtons = document.querySelectorAll('.faq-btn');
+
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+                const isOpen = !content.classList.contains('hidden');
+
+                // Close other opened FAQs for a clean accordion experience
+                document.querySelectorAll('.faq-content').forEach(item => item.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(ic => ic.style.transform = 'rotate(0deg)');
+
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Contact Form to WhatsApp Dispatcher
+        const leadForm = document.getElementById('lead-form');
+        const formFeedback = document.getElementById('form-feedback');
+
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('user-name').value.trim();
+            const phone = document.getElementById('user-phone').value.trim();
+            const interest = document.getElementById('user-interest').value;
+            const message = document.getElementById('user-message').value.trim();
+
+            const textMessage = `Hola TechPro Studio / G&R,%0A%0AMi nombre es: *${encodeURIComponent(name)}*%0ATeléfono: *${encodeURIComponent(phone)}*%0AEstoy interesado en: *${encodeURIComponent(interest)}*%0AMensaje adicional: ${encodeURIComponent(message || 'Deseo conocer horarios y promociones.')}`;
+
+            formFeedback.classList.remove('hidden');
+
+            setTimeout(() => {
+                window.open(`https://wa.me/51999999999?text=${textMessage}`, '_blank');
+            }, 700);
+        });
+    </script>
+</body>
+</html>
